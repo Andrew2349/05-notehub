@@ -35,11 +35,12 @@ export async function createNote(payload:CreateNoteRequest) {
 }
 
 export async function deleteNote(noteId: string) {
-  await axios.delete<Note>(`https://notehub-public.goit.study/api/notes/${noteId}`, {
+  const responce = await axios.delete<Note>(`https://notehub-public.goit.study/api/notes/${noteId}`, {
     
   headers: {
         Authorization: `Bearer ${myKey}`,
     },
   })
+  return responce
   
 }

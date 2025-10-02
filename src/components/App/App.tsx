@@ -29,7 +29,8 @@ function App() {
     })
 
     const handleSearch = useDebouncedCallback((value: string) => {
-            setSearch(value)
+        setSearch(value)
+        setCurPage(1)
         }, 500)
         
     

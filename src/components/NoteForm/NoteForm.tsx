@@ -24,7 +24,7 @@ interface NoteFormProps{
 
 const Schema = Yup.object().shape({
   title: Yup.string().min(3, "Title can't be so short").max(50, "Title is too long").required("Title is required"),
-  content: Yup.string().min(2, "Content can't be so short").max(500, "Title is too long").required("Content is required"),
+  content: Yup.string().max(500, "Title is too long"),
   tag:Yup.string().oneOf(["Todo","Work","Personal","Meeting","Shopping"]).required("Tag is required")
 })
 
@@ -34,12 +34,15 @@ export default function NoteForm({onClose}:NoteFormProps) {
 
     const mutation = useMutation({
       mutationFn: (values: CreateNoteRequest) => createNote(values),
-      onSuccess:()=>queryClient.invalidateQueries({queryKey:["notes"]})
+      onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notes"] }),
+      
     })
 
     function handleSubmit(values:NoteFormValues, actions:FormikHelpers<NoteFormValues>) {
       mutation.mutate(values)
+      
       actions.resetForm()
+      onClose()
     }
 
     
