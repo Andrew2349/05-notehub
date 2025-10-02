@@ -41,6 +41,6 @@ export async function deleteNote(noteId: string) {
         Authorization: `Bearer ${myKey}`,
     },
   })
-  return responce
+  return responce.data
   
 }
